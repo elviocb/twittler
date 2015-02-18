@@ -10,26 +10,16 @@
 
       $(document).ready(function(){
 
-        
-
         function updateFeed() {
           var $feed = $('.feed');
           $feed.html('');
           var index = streams.home.length - 1;
           
-          // while(index >= 0){
-          //   var tweet = streams.home[index];
-          //   var $tweet = $('<div></div>');
-          //   $tweet.text('@' + tweet.user + ': ' + tweet.message).addClass('tweet');
-          //   $tweet.appendTo($feed);
-          //   index -= 1;
-          // }
-          //var randomnumber = Math.floor(Math.random() * 100);
-          
           while(index >= 0){
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message).addClass('tweet');
+            var tweet = streams.home[index],
+                $tweet = $('<div></div>'),
+                tweetTime = new Date();
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' posted: ' + tweetTime).addClass('tweet');
             $tweet.appendTo($feed);
             index -= 1;
           }
