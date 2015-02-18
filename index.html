@@ -18,8 +18,13 @@
           while(index >= 0){
             var tweet = streams.home[index],
                 $tweet = $('<div></div>'),
-                tweetTime = new Date();
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' posted: ' + tweetTime).addClass('tweet');
+                tweetAvatar = '<img src="http://lorempixel.com/50/50/people/" class="avatar"><a href="#"></a></span> ',
+                tweetTime = '<span class="tweet time">' + new Date() + '</span> ',
+                tweetName = '<span class="tweet name"><a href="#">' + tweet.user + '<a/></span> ',
+                tweetContact = '<span class="tweet contact">' + '@' + tweet.user + '</span> ',
+                tweetMessage = '<span class="tweet message">' + tweet.message + '</span> ';
+
+            $tweet.html(tweetAvatar + tweetName + tweetContact + tweetTime + '<br>' + tweetMessage).addClass('clearfix, tweetBlock');
             $tweet.appendTo($feed);
             index -= 1;
           }
@@ -27,7 +32,7 @@
 
         var scheduleFeedUpdate = function(){
           updateFeed();
-          setTimeout(scheduleFeedUpdate, Math.random() * 2000);
+          setTimeout(scheduleFeedUpdate, Math.random() * 82000);
         }
         scheduleFeedUpdate();
 

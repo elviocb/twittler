@@ -31,10 +31,57 @@ body {
 	height: 300px;
 }
 
-.tweet {
+.tweetBlock {
 	width: auto;
-	height: 75px;
+	min-height: 50px;
 	background-color: #fff;
-	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #e1e8ed;
+	border-bottom: 1px solid #e1e8ed;
+	border-left: 1px solid #e1e8ed;
+	padding: 13px;
+	position: relative;
 }
+
+.tweet {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	color: #292f33;
+	display: inline-block;
+/*	position: relative;
+	left: 65px;*/
+}
+
+.tweet.name {
+	font-weight: bold;
+}
+.tweet.name a {
+	text-decoration: none;
+	color: #292f33;
+}
+.tweet.name a:hover {
+	text-decoration: underline;
+	color: #0084B4;
+}
+
+.tweet.contact, .tweet.time {
+	font-size: 13px;
+	color: #8899a6;
+	font-weight: normal;
+}
+
+.tweet.message {
+	
+}
+
+.avatar {
+	display: inline;
+	float: left;
+	margin-right: 13px;
+	/*position: absolute;*/
+}
+
+.clearfix {
+	overflow: auto;
+}
+
 
