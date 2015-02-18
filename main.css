@@ -30,3 +30,11 @@ body {
 	width: 290px;
 	height: 300px;
 }
+
+.tweet {
+	width: auto;
+	height: 75px;
+	background-color: #fff;
+	border-bottom: 1px solid #ddd;
+}
+
