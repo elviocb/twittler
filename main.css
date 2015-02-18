@@ -7,8 +7,26 @@ body {
 	width: 1200px;
 	margin: 0 auto;
 	background-color: #fff;
-};
+}
 
-.tweet {
-	
+.info, .feed, .following {
+	margin: 5px;
+	float: left;
+	border-radius: 5px;
+    background-color: #fff;
+}
+
+.info {
+	width: 290px;
+	height: 200px;
+}
+
+.feed {
+	width: 590px;
+	height: auto;
+}
+
+.following {
+	width: 290px;
+	height: 300px;
 }

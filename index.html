@@ -9,15 +9,15 @@
     <script>
 
       $(document).ready(function(){
-        var $container = $('.container');
-        $container.html('');
+        var $feed = $('.feed');
+        $feed.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($container);
+          $tweet.appendTo($feed);
           index -= 1;
         }
 
@@ -25,7 +25,12 @@
 
     </script>
     <div class="container">
-      
+      <section class="info">
+      </section>
+      <section class="feed">    
+      </section>
+      <section class="following">     
+      </section>    
     </div>
   </body>
 </html>
