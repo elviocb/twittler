@@ -10,16 +10,30 @@
 
       $(document).ready(function(){
 
+        function defineAvatar(user){
+          var result,
+              avatar;
+          switch(user){
+            case 'shawndrost': result = 1; break;
+            case 'sharksforcheap': result = 2; break;
+            case 'mracus': result = 3; break;
+            case 'douglascalhoun': result = 4; break;
+            default: console.log('something is wrong: user not found');
+          }
+          avatar = "<img src='http://lorempixel.com/50/50/people/" + result + "'" + " class='avatar'><a href='#'></a></span> "
+          return avatar;
+        }
+
         function updateFeed() {
           var $feed = $('.feed');
           $feed.html('');
-          var index = streams.home.length - 1;
+          var index = streams.home.length - 1; 
           
           while(index >= 0){
             var tweet = streams.home[index],
                 $tweet = $('<div></div>'),
-                tweetAvatar = '<img src="http://lorempixel.com/50/50/people/" class="avatar"><a href="#"></a></span> ',
-                tweetTime = '<span class="tweet time">' + new Date() + '</span> ',
+                tweetAvatar = defineAvatar(streams.home[index].user),
+                tweetTime = '<span class="tweet time">- ' + new Date() + '</span> ',
                 tweetName = '<span class="tweet name"><a href="#">' + tweet.user + '<a/></span> ',
                 tweetContact = '<span class="tweet contact">' + '@' + tweet.user + '</span> ',
                 tweetMessage = '<span class="tweet message">' + tweet.message + '</span> ';
@@ -32,7 +46,7 @@
 
         var scheduleFeedUpdate = function(){
           updateFeed();
-          setTimeout(scheduleFeedUpdate, Math.random() * 82000);
+          setTimeout(scheduleFeedUpdate, Math.random() * 4000);
         }
         scheduleFeedUpdate();
 
