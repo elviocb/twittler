@@ -13,20 +13,25 @@
 
         function defineAvatar(user){
           var result,
-              avatar;
+              avatar,
+              defaultPhotoLink = 'http://lorempixel.com/50/50/people/',
+              personalPhotolink = 'profile-pic.jpg'
+          
           switch(user){
-            case 'shawndrost': result = 1; break;
-            case 'sharksforcheap': result = 2; break;
-            case 'mracus': result = 3; break;
-            case 'douglascalhoun': result = 4; break;
+            case 'shawndrost': result = defaultPhotoLink + 1; break;
+            case 'sharksforcheap': result = defaultPhotoLink + 2; break;
+            case 'mracus': result = defaultPhotoLink + 3; break;
+            case 'douglascalhoun': result = defaultPhotoLink + 4; break;
+            case 'elviocb': result = personalPhotolink; break;
             default: console.log('something is wrong: user not found');
           }
-          avatar = "<img src='http://lorempixel.com/50/50/people/" + result + "'" + " class='avatar'><a href='#'></a></span> "
+
+          avatar = "<img src=" + result + " class='avatar'><a href='#'></a></span> ";
           return avatar;
         }
 
         function updateFeed() {
-          var $feed = $('.feed');
+          var $feed = $('.feedTweets');
           $feed.html('');
           var index = streams.home.length - 1; 
           
@@ -47,9 +52,29 @@
 
         var scheduleFeedUpdate = function(){
           updateFeed();
-          setTimeout(scheduleFeedUpdate, Math.random() * 4000);
+          setTimeout(scheduleFeedUpdate, Math.random() * 1000);
         }
         scheduleFeedUpdate();
+
+        
+        // generate random tweets on a random schedule
+        var generateNewTweet = function(user, message){
+          var tweet = {};
+          tweet.user = user;
+          tweet.message = message;
+          tweet.created_at = new Date();
+          streams.home.push(tweet);
+        };
+
+        // Create New tweets!
+        $('.newTweet > input').keypress(function(e){
+          if(e.charCode === 13) {
+            generateNewTweet("elviocb", e.target.value);
+            // Clean the input value; 
+            e.target.value = "";
+          }
+
+        })
 
       });
 
@@ -83,7 +108,12 @@
           </div>
         </div>
       </section>
-      <section class="feed">    
+      <section class="feed">
+        <div class="newTweet">
+          <img class="tweet-pic" src="profile-pic.jpg" alt="tweet picture">
+          <input type="text" placeholder="What's happening?">
+        </div>    
+        <div class="feedTweets"></div>    
       </section>
       <section class="following">     
       </section>    
