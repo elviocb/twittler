@@ -9,6 +9,13 @@ body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+header {
+	height: 46px;
+	width: auto;
+	background-color: #fff;
+	margin-bottom: 5px;
+}
+
 .container {
 	width: 1200px;
 	margin: 0 auto;
@@ -29,6 +36,7 @@ body {
 .feed {
 	width: 590px;
 	height: auto;
+	border-radius: 6px 6px 0 0;
 }
 
 .following {
@@ -45,6 +53,10 @@ body {
 	border-left: 1px solid #e1e8ed;
 	padding: 13px;
 	position: relative;
+}
+
+.feed div:nth-of-type(1) { 
+    border-radius: 6px 6px 0 0;
 }
 
 .tweet {
@@ -94,14 +106,14 @@ body {
 }
 
 .info > .top {
-	height: 50%;
+	height: 48%;
 	width: auto;
 	background-color: #1b84b1;
 	border-radius: 6px 6px 0 0;
 }
 
 .info > .bottom {
-	height: 50%;
+	height: 52%;
 	width: auto;
 	background-color: #fff;
 	border-radius: inherit;
