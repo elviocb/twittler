@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="main.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.min.js"></script>
   </head>
   <body>
     <script>
@@ -33,7 +34,7 @@
             var tweet = streams.home[index],
                 $tweet = $('<div></div>'),
                 tweetAvatar = defineAvatar(streams.home[index].user),
-                tweetTime = '<span class="tweet time">- ' + new Date() + '</span> ',
+                tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> ',
                 tweetName = '<span class="tweet name"><a href="#">' + tweet.user + '<a/></span> ',
                 tweetContact = '<span class="tweet contact">' + '@' + tweet.user + '</span> ',
                 tweetMessage = '<span class="tweet message">' + tweet.message + '</span> ';
