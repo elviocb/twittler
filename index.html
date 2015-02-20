@@ -26,122 +26,70 @@
             case 'mracus': result = defaultPhotoLink + 3; break;
             case 'douglascalhoun': result = defaultPhotoLink + 4; break;
             case 'elviocb': result = personalPhotolink; break;
-            default: console.log('something is wrong: user not found');
+            default: console.log('something is wrong: user avatar not found');
           }
 
           avatar = "<img src=" + result + " class='avatar'> ";
           return avatar;
         }
 
-        // function updateFeed() {
-        //   var $feed = $('.feedTweets');
-        //   $feed.html('');
-        //   var index;
-
-        //   subpage ?  index = streams.users[activeUser].length - 1 : index = streams.home.length - 1;
-              
-        //   while(index >= 0){
-        //     var tweet;
-            
-        //     if (subpage) {
-        //       tweet = streams.users[activeUser][index];
-        //     } else {
-        //       tweet = streams.home[index];
-        //     }
-            
-        //     var $tweet = $('<div></div>'),
-        //         tweetAvatar = defineAvatar(streams.home[index].user),
-        //         tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> ',
-        //         tweetName = '<span class="tweet name"><a href="#" class="anchor" data-feed=' + tweet.user + '>' + tweet.user + '<a/></span> ',
-        //         tweetContact = '<span class="tweet contact">' + '@' + tweet.user + '</span> ',
-        //         tweetMessage = '<span class="tweet message">' + tweet.message + '</span> ';
-        //     // console.log(tweetAvatar);    
-        //     $tweet.html(tweetAvatar + tweetName + tweetContact + tweetTime + '<br>' + tweetMessage).addClass('clearfix, tweetBlock');
-        //     $tweet.appendTo($feed);
-        //     index -= 1;
-        //   }
-
-
-          // function newUpdateFeed(userFeed){
-          //   // console.log(userFeed);
-          //   // console.log(streams.users[userFeed]);
-          //   var index,
-          //       usersFeed = streams.users[userFeed],
-          //       homeFeed = streams.home;
-
-          //   // Find the size of the corresponding array    
-          //   if (userFeed === 'general') {
-          //     index = userFeed.length - 1;
-          //   } else {
-          //     index = homeFeed.length - 1;
-          //   }
-
-
-
-          //   for (var i = 0; i < index; i--) {
-          //     console.log()
-          //   }
-            
-          // }
-
-          //Call Feed
-
-
-          
-          // $('.anchor , #logo').on('click', function(e){
-          //   e.preventDefault();
-          //   e.stopImmediatePropagation();
-          //   activeUser = $(this).data('feed');
-          //   console.log(activeUser);
-          //   routerFeed(activeUser);
-          //   subpage = false;
-          // });
-
-        // }
-
-
 
         function routerFeed(chosenFeed) {
+         
+          // Define the variables and creates the fragment object;
           var feed,
               result = document.createDocumentFragment();
 
+          // Define which feed will be displayed    
           chosenFeed === 'general' ? 
                                       feed = streams.home : 
                                                             feed = streams.users[chosenFeed];
           
+          // If the feed is undefined it creates an empty array;
+          if (feed === undefined) feed = [];
+
           // Clean the Feed HTML
           $('#feedTweets').html('');
-
-          for (var i = feed.length -1; i >= 0; i--) {
-            var tweet = genElement('div', null, 'class', 'clearfix tweetBlock');
-            tweet.appendChild(createTweet(feed[i]['user'], feed[i]['message'], feed[i]['createdAt']));
-            result.appendChild(tweet);
+          
+          // Verify if the feed is not empty
+          if (feed.length > 0) {       
+            
+            // Interact over the feed and create the tweet sets
+            for (var i = feed.length -1; i >= 0; i--) {
+              
+              // create the main block div
+              var tweet = genElement('div', null, 'class', 'clearfix tweetBlock');
+              
+              // call the function createTweet and it returns an complete tweet block with it's 
+              // attributes already setted
+              tweet.appendChild(createTweet(feed[i]['user'], feed[i]['message'], feed[i]['createdAt']));
+              
+              // append the tweet set into the Fragment
+              result.appendChild(tweet);
+            }
           }
+
+          // append the tweet's set into the DOM once.
           $('#feedTweets').append(result);
+          
+          // Update the click handlers to handle the new DOM elements
           updateEventHandlers(); 
         }
 
+        
         function updateEventHandlers(){
           
           /* ========== Event Handler ============
           ======================================*/
 
-          $('.anchor').on('click', function(e){
+          $('.anchor, .profile.name, #logo').on('click', function(e){
             e.preventDefault();
             e.stopImmediatePropagation();
             
             activeUser = $(this).data('feed');
             console.log(activeUser);
             routerFeed(activeUser);
-            // subpage = false;
           });        
-
-          $('#logo').on('click', function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            var activeUser = $(this).data('feed');
-            routerFeed(activeUser);
-          });
 
           /* ======================================*/
         }
@@ -180,17 +128,18 @@
         }
 
 
-        function generateFeed() {
-          var $tweet = $('<div></div>');
-          var tweetAvatar = defineAvatar(streams.home[index].user);
-          var tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> '
+        // function generateFeed() {
+        //   var $tweet = $('<div></div>');
+        //   var tweetAvatar = defineAvatar(streams.home[index].user);
+        //   var tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> '
 
-        }
+        // }
 
         var scheduleFeedUpdate = function(){
-          updateFeed();
-          setTimeout(scheduleFeedUpdate, Math.random() * 1000000);
+          routerFeed(activeUser);
+          setTimeout(scheduleFeedUpdate, Math.random() * 2000);
         }
+        
         scheduleFeedUpdate();
         
         // generate random tweets on a random schedule
@@ -425,7 +374,7 @@
         <div class="bottom">
           <div class="userInfo">
             <img id="profile-pic" src="profile-pic.jpg" alt="profile picture">
-            <p class="profile name">Elvio Cavalcante</p>
+            <p class="profile name" data-feed="elviocb"><a href="#">Elvio Cavalcante</a></p>
             <p class="profile contact">@elviocavalcante</p>
           </div>
           <div class="userStats">
