@@ -12,28 +12,12 @@
 
       $(document).ready(function(){
 
+        // This variable defines the active feed
         var activeUser = 'general';
 
-        function defineAvatar(user){
-          var result,
-              avatar,
-              defaultPhotoLink = 'http://lorempixel.com/50/50/people/',
-              personalPhotolink = 'profile-pic.jpg'
-          
-          switch(user){
-            case 'shawndrost': result = defaultPhotoLink + 1; break;
-            case 'sharksforcheap': result = defaultPhotoLink + 2; break;
-            case 'mracus': result = defaultPhotoLink + 3; break;
-            case 'douglascalhoun': result = defaultPhotoLink + 4; break;
-            case 'elviocb': result = personalPhotolink; break;
-            default: console.log('something is wrong: user avatar not found');
-          }
+      
 
-          avatar = "<img src=" + result + " class='avatar'> ";
-          return avatar;
-        }
-
-
+        // Captures the click handler's value and define which feed will be displayed 
         function routerFeed(chosenFeed) {
          
           // Define the variables and creates the fragment object;
@@ -77,6 +61,7 @@
         }
 
         
+        // Updates the event handlers
         function updateEventHandlers(){
           
           /* ========== Event Handler ============
@@ -93,10 +78,8 @@
 
           /* ======================================*/
         }
-
-        updateEventHandlers();
         
-
+        // Creates the tweet element block
         function createTweet(user, message, createdAt){
 
           var momTime = moment(createdAt).fromNow();
@@ -121,27 +104,15 @@
           fragment.appendChild(lineBreak);
           fragment.appendChild(message);
           
-          // var test = genElement('span', null, 'class', 'tweet name');
-          // fragment.appendChild(test);
           return fragment;
-
         }
 
-
-        // function generateFeed() {
-        //   var $tweet = $('<div></div>');
-        //   var tweetAvatar = defineAvatar(streams.home[index].user);
-        //   var tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> '
-
-        // }
-
+        // Define the feed's update time
         var scheduleFeedUpdate = function(){
           routerFeed(activeUser);
           setTimeout(scheduleFeedUpdate, Math.random() * 2000);
         }
-        
-        scheduleFeedUpdate();
-        
+              
         // generate random tweets on a random schedule
         var generateNewTweet = function(user, message){
           if (!streams.users[user]) streams.users[user] = [];
@@ -153,56 +124,7 @@
           streams.home.push(tweet);
         };
 
-        
-
-        // var genTweetTime = function(){                
-        //   // Create the necessary elements
-        //   var elemSpan = document.createElement('span');
-
-        //   // Create the necessary attributes
-        //   var att = document.createAttribute("class");
-        //       att.value = "tweet time";
-
-        //   // Set the attributes into the elements
-        //   elemSpan.setAttributeNode(att); 
-
-        //   // Create the necessary text nodes
-        //   var timeNode = document.createTextNode(moment(new Date()).fromNow());
-          
-        //   // Append the elements
-        //   elemSpan.appendChild(timeNode);
-
-        //   return elemSpan;
-        // };
-
-        // // tweetName = '<span class="tweet name"><a href="#" class="anchor" data-feed=' + tweet.user + '>' + tweet.user + '<a/></span> 
-
-        // var genTweetName = function(userName){                
-        //   // Create elements
-        //   var elemSpan = document.createElement('span');
-
-        //   // Create the necessary attributes
-        //   var att1 = document.createAttribute("href"),
-        //       att2 = document.createAttribute("class"),
-        //       att3 = document.createAttribute("data-feed");
-        //       att1.value = "#";
-        //       att2.value = "anchor";
-        //       att3.value = "elviocb";
-
-        //   // Set the attributes into the elements
-        //   elemSpan.setAttributeNode(att1); 
-        //   elemSpan.setAttributeNode(att2); 
-        //   elemSpan.setAttributeNode(att3); 
-
-        //   // Create the necessary text nodes
-        //   var timeNode = document.createTextNode('elviocb');
-          
-        //   // Append the elements
-        //   elemSpan.appendChild(timeNode);
-
-        //   return elemSpan;
-        // };
-
+        // This function returns the tweet's avatar picture;
         function genTweetAvatar(user){        
           
           var result,
@@ -233,7 +155,7 @@
           return result;
         }
 
-        
+        // This function creates tag elements with unlimited attributes
         function genElement(elemName, text) {        
           //Define the variables
           var element, text = text || '';
@@ -258,101 +180,7 @@
           return false;
         }
 
-        function updateFeed() {
-          // var $feed = $('.feedTweets');
-          // $feed.html('');
-          // var index;
-
-          // subpage ?  index = streams.users[activeUser].length - 1 : index = streams.home.length - 1;
-              
-          // while(index >= 0){
-          //   var tweet;
-            
-          //   if (subpage) {
-          //     tweet = streams.users[activeUser][index];
-          //   } else {
-          //     tweet = streams.home[index];
-          //   }
-            
-          //   var $tweet = $('<div></div>'),
-          //       tweetAvatar = defineAvatar(streams.home[index].user),
-          //       tweetTime = '<span class="tweet time">- ' + moment(new Date()).fromNow() + '</span> ',
-          //       tweetName = '<span class="tweet name"><a href="#" class="anchor" data-feed=' + tweet.user + '>' + tweet.user + '<a/></span> ',
-          //       tweetContact = '<span class="tweet contact">' + '@' + tweet.user + '</span> ',
-          //       tweetMessage = '<span class="tweet message">' + tweet.message + '</span> ';
-          //   // console.log(tweetAvatar);    
-          //   $tweet.html(tweetAvatar + tweetName + tweetContact + tweetTime + '<br>' + tweetMessage).addClass('clearfix, tweetBlock');
-          //   $tweet.appendTo($feed);
-          //   index -= 1;
-
-            var $feed = $('.feedTweets');
-
-
-          // }
-
-
-          // $('.anchor , #logo').on('click', function(e){
-          //   e.preventDefault();
-          //   e.stopImmediatePropagation();
-          //   activeUser = $(this).data('feed');
-          //   console.log(activeUser);
-          //   routerFeed(activeUser);
-          //   subpage = false;
-          // });
-
-        }
-
-
-
-
-        // var avatar = genTweetAvatar('elviocb'),
-        //     nameParent = genElement('span', null, 'class', 'tweet name'),
-        //     nameChild1 = genElement('a', '@elviocb', 'href', '#', 'class', 'anchor', 'data-feed', 'elviocb'),
-        //     contact = genElement('span', 'criou o nome', 'class', 'tweet contact'),
-        //     time = genElement('span', 'criou o nome', 'class', 'tweet time');
- 
-        // // Insert the name's child element into the name element
-        // nameParent.appendChild(nameChild1);
-        
-        // var fragment = document.createDocumentFragment();
-        // // Append the element's into a frament to interact with the DOM once.
-        // fragment.appendChild(avatar);
-        // fragment.appendChild(nameParent);
-        // fragment.appendChild(contact);
-        // fragment.appendChild(time);
-        
-        // // var test = genElement('span', null, 'class', 'tweet name');
-        // // fragment.appendChild(test);
-        
-        
-        
-
-
-
-
-
-       
-        // var genTweetName = function(){                
-        //   var tweetUser = 'elviocb';
-        //   return $("<span></span>")
-        //                   .addClass('tweet name')
-        //                     .html('<a></a>')
-        //                       .text(tweetUser)
-                                
-        //                       // .attr({
-        //                       //   'href': '#',
-        //                       //   'class': 'anchor',
-        //                       //   'data-feed': tweetUser
-        //                       // })
-        //                       //   .text(tweetUser);                
-        // };
-        
-        
-
-
-
-
-        // Create New tweets!
+        // Create New tweets on the timeline
         $('.newTweet > input').keypress(function(e){
           if(e.charCode === 13) {
             generateNewTweet("elviocb", e.target.value);
@@ -362,6 +190,14 @@
 
         })
 
+        // The init of the app
+        var init = function(){
+          // Render the actual feed
+          scheduleFeedUpdate();
+          // Update the event handlers
+          updateEventHandlers();
+        }();
+        // End Script
       });
 
     </script>
@@ -401,8 +237,6 @@
         </div>    
         <div id="feedTweets"></div>    
       </section>
-      <section class="following">     
-      </section>    
     </div>
   </body>
 </html>
