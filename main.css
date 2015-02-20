@@ -149,6 +149,8 @@ header {
 	font-size: 13px;
 	color: #8899a6;
 	font-weight: normal;
+	margin-right: 4px;
+	margin-left: 4px; 
 }
 
 .avatar {
