@@ -35,7 +35,7 @@ $(document).ready(function(){
         
         // call the function createTweet and it returns an complete tweet block with it's 
         // attributes already setted
-        tweet.appendChild(createTweet(feed[i]['user'], feed[i]['message'], feed[i]['createdAt']));
+        tweet.appendChild(createTweet(feed[i]['user'], feed[i]['message'], feed[i]['created_at']));
         
         // append the tweet set into the Fragment
         result.appendChild(tweet);
